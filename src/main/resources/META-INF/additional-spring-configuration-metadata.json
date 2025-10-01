@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "openapi.service.title",
+      "type": "java.lang.String",
+      "description": "Description for openapi.service.title."
+  }
+] }

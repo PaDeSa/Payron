@@ -1,0 +1,40 @@
+package com.dsp.gl.users;
+
+import org.springframework.beans.BeanUtils;
+
+public class UserMapper {
+
+    private UserMapper() {
+    }
+    // conversion userRequestDto => user
+    public static User toUser (UserRequestDto userRequestDto) {
+        User user = new User();
+        user.setLastName(userRequestDto.lastName());
+        user.setFirstName(userRequestDto.firstName());
+        user.setEmail(userRequestDto.email());
+        user.setPassword(userRequestDto.password());
+        user.setUsername(userRequestDto.username());
+        return user;
+    }
+
+    // conversion user => UserResponseDto
+    public static UserResponseDto toUserResponse(User user) {
+        UserResponseDto userResponseDto = new UserResponseDto();
+        //BeanUtils.copyProperties(user, userResponseDto);
+        userResponseDto.setId(user.getId());
+        userResponseDto.setLastName(user.getLastName());
+        userResponseDto.setEmail(user.getEmail());
+        userResponseDto.setFirstName(user.getFirstName());
+        userResponseDto.setUsername(user.getUsername() != null ? user.getUsername() : "Neant");
+        userResponseDto.setRoles(user.getRoles());
+        return userResponseDto;
+    }
+
+    // conversion userRequestDto => user
+    public static User toUserOtherWay(UserRequestDto userRequestDto) {
+        User user = new User();
+        BeanUtils.copyProperties(userRequestDto, user);
+        return user;
+    }
+
+}
